@@ -230,7 +230,7 @@ with tab1:
                 )
         st.divider()
 
-    if st.button("🔮 Predecir nivel de estrés", type="primary", use_container_width=True):
+    if st.button("🔮 Predecir nivel de estrés", type="primary", width="stretch"):
         if modelo is None or scaler is None:
             st.error(
                 "No se puede predecir: faltan `model/modelo_estres.pkl` "
@@ -307,7 +307,7 @@ with tab2:
         margin=dict(l=10, r=30, t=20, b=10),
     )
     fig.add_vline(x=0, line_width=1, line_color="gray")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     col_a, col_b = st.columns(2)
     with col_a:
@@ -316,12 +316,12 @@ with tab2:
             "Coeficiente", ascending=False
         )
         st.dataframe(top_up[["Variable", "Coeficiente"]], hide_index=True,
-                     use_container_width=True)
+                     width="stretch")
     with col_b:
         st.markdown("##### 🟢 Top 5 — reducen el estrés")
         top_down = df_imp[df_imp["Coeficiente"] < 0].sort_values("Coeficiente")
         st.dataframe(top_down[["Variable", "Coeficiente"]], hide_index=True,
-                     use_container_width=True)
+                     width="stretch")
 
 # ----------------------------------------------------------------------------- #
 # TAB 3 — Métricas del modelo
@@ -345,7 +345,7 @@ with tab3:
             "R²": [0.24, 0.50, 0.77],
         }
     )
-    st.dataframe(df_modelos, hide_index=True, use_container_width=True)
+    st.dataframe(df_modelos, hide_index=True, width="stretch")
 
     fig_m = px.bar(
         df_modelos,
@@ -364,7 +364,7 @@ with tab3:
         yaxis_range=[0, 1],
         margin=dict(l=10, r=10, t=20, b=10),
     )
-    st.plotly_chart(fig_m, use_container_width=True)
+    st.plotly_chart(fig_m, width="stretch")
 
     st.info(
         "El modelo final (Ridge grado 3, α=100) explica el **77%** de la "
